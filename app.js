@@ -5,6 +5,7 @@ addEventListener('DOMContentLoaded',()=>{
     const ground = document.querySelector('.ground');
     const counterBoard = document.querySelector('.counter');
     let isGameOver = false;
+    let isStarted = false;
 
     const WINDOW_HEIGHT = 620;
     const WINDOW_WIDTH = 500;
@@ -22,8 +23,11 @@ addEventListener('DOMContentLoaded',()=>{
         const gravity = 2;
 
         let counter = 0;
-    function startGame(){
 
+    bird.style.bottom = birdBottom + 'px';
+    bird.style.left = birdLeft + 'px';
+    function birdFalling(){
+        isStarted = true;
 
         bird.style.bottom = birdBottom + 'px';
         bird.style.left = birdLeft + 'px';
@@ -34,17 +38,25 @@ addEventListener('DOMContentLoaded',()=>{
 
     }
 
-    let gameTimerId = setInterval(startGame,20);
+    let gameTimerId ;
 
 
     function jump(){
-        if(birdBottom<530) birdBottom += 50;
+        if(birdBottom<530) birdBottom += 35;
         bird.style.bottom = birdBottom + 'px';
     }
 
     //may be change on only space
-    addEventListener('keyup',jump);
-    addEventListener('mouseup',jump);
+    addEventListener('keyup',()=>{
+        if(!isStarted)
+        restart();
+        jump()
+    });
+    addEventListener('mouseup',()=>{
+        if(!isStarted)
+        restart();
+        jump()
+    });
 
 
     function generateObstacle(){
@@ -102,23 +114,27 @@ addEventListener('DOMContentLoaded',()=>{
 
     }
 
-    let generationObstaclesInterval = setInterval(generateObstacle,3000)
+    let generationObstaclesInterval ;
 
     function fallAfterDie(){
         let isFall = false;
         const fallAfterDieInterval = setInterval(()=>{
             if(birdBottom> 0) {
-                birdBottom -= gravity;
-                bird.style.bottom = birdBottom + 'px';
+
+                if((birdBottom-gravity*5)<0) bird.style.bottom = 0 + 'px';
+                else {
+                    birdBottom -= gravity*5;
+                    bird.style.bottom = birdBottom + 'px';
+                }
             }
             else clearInterval(fallAfterDieInterval)
 
             },20);
-
     }
 
     function gameOver(){
         isGameOver = true;
+        isStarted = false;
         clearInterval(generationObstaclesInterval);
         clearInterval(gameTimerId);
         removeEventListener('keyup',jump);
@@ -134,7 +150,6 @@ addEventListener('DOMContentLoaded',()=>{
 
     function removeObstacles(){
         const obstacles = document.querySelectorAll('.obstacle');
-        console.log(obstacles.length)
         for (let i = 0; i<obstacles.length; i++){
             obstacles[i].parentNode.removeChild(obstacles[i])
         }
@@ -148,7 +163,7 @@ addEventListener('DOMContentLoaded',()=>{
         birdBottom = startPosBirdBottom;
         addEventListener('keyup',jump);
         addEventListener('mouseup',jump);
-        gameTimerId = setInterval(startGame,20);
+        gameTimerId = setInterval(birdFalling,20);
         generationObstaclesInterval = setInterval(generateObstacle,3000)
 
     }
