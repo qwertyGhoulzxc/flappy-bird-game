@@ -1,0 +1,56 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.game-container{
+    position: relative;
+    margin: auto;
+    width: 500px;
+    height: 780px;
+}
+
+.sky{
+    position: absolute;
+    width: 500px;
+    height: 620px;
+    background: lightblue;
+}
+
+.ground{
+    position:absolute;
+    background: brown;
+    width: 500px;
+    height: 160px;
+    bottom: 0;
+}
+
+.bird{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: yellow;
+    z-index: 2;
+}
+
+.obstacle{
+    position: absolute;
+    background: lightgreen;
+    z-index: 1;
+    width: 60px;
+}
+
+.counter {
+    font-family: 'Nova Square', sans-serif;
+    position: absolute;
+    z-index: 999;
+    color: white;
+    left: 50%;
+    top: 100px;
+    transform:translate(-50%,0) ;
+    -webkit-text-stroke: 2px #000;
+    text-stroke: 2px #000;
+    font-size: 64px;
+}
