@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 
@@ -31,7 +32,7 @@
     position: absolute;
     width: 40px;
     height: 40px;
-    background: yellow;
+   background: yellow;
     z-index: 2;
 }
 
@@ -54,3 +55,46 @@
     text-stroke: 2px #000;
     font-size: 64px;
 }
+
+
+    /*controls */
+.controls {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform:translate(-50%,-50%) ;
+    width: 200px;
+    height: 200px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.controls .score-container{
+    width: 120px;
+    height: 160px;
+    background: burlywood;
+
+
+}
+.score-container p{
+    font-family: 'Nova Square', sans-serif;
+    -webkit-text-stroke: 2px #000;
+    text-stroke: 2px #000;
+    color: white;
+    font-size: 32px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.restart-btn{
+    display: none;
+    background:coral ;
+    width: 75px;
+    border-radius: 10px;
+    height: 40px;
+    border: none;
+}
+
+
