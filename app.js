@@ -16,7 +16,7 @@ addEventListener('DOMContentLoaded',()=>{
     const WINDOW_HEIGHT = 620;
     const WINDOW_WIDTH = 500;
     const OBSTACLE_WIDTH = 60;
-    const GAP = 140;
+    const GAP = 160;
     const GROUND_HEIGHT = 160;
     const BIRD_SIZE = 40;
 
@@ -28,8 +28,8 @@ addEventListener('DOMContentLoaded',()=>{
         let birdBottom = startPosBirdBottom;
 
         const idlenessGravity = 6;
-        const jumpingGravity = 2;
-        const heightOfJump = 30;
+        const jumpingGravity = 3;
+        const heightOfJump = 45;
 
         let gravity = jumpingGravity;
 
@@ -60,7 +60,7 @@ addEventListener('DOMContentLoaded',()=>{
         bird.style.bottom = birdBottom + 'px';
         gravity=jumpingGravity;
         clearTimeout(changeGravity);
-        changeGravity =setTimeout(()=>{gravity=idlenessGravity; isGravityChanged=false},500)
+        changeGravity =setTimeout(()=>{gravity=idlenessGravity; isGravityChanged=false},0)
 
     }
 
@@ -105,7 +105,7 @@ addEventListener('DOMContentLoaded',()=>{
         obstacleTop.style.height = obstacleTopHeight + 'px';
         obstacleTop.style.left =  obstacleLeft + 'px';
 
-        const obstacleSpeed = 1;
+        const obstacleSpeed = 2;
 
         function moveObstacles(){
         obstacleLeft -= obstacleSpeed;
@@ -192,7 +192,7 @@ addEventListener('DOMContentLoaded',()=>{
         addEventListener('keyup',jump);
         addEventListener('mouseup',jump);
         gameTimerId = setInterval(birdFalling,30);
-        generationObstaclesInterval = setInterval(generateObstacle,2700);
+        generationObstaclesInterval = setInterval(generateObstacle,1500);
 
         Controls();
 
